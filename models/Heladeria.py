@@ -1,0 +1,62 @@
+from Base import Base
+
+class Heladeria():
+    def __init__(self, nombre: str, productos: list):
+        self.__nombre = nombre
+        self.__productos = productos
+        self.__ventas_del_dia = 0.0
+
+    def producto_mas_rentable(self) -> str:
+        '''Devuelve el producto mas rentable''' 
+        productos = self.__productos
+        productos.sort(key= lambda x: x.calcular_rentabilidad(), reverse=True)
+        return productos[0].nombre
+
+    def vender(self, nombre_producto: str) -> bool:
+        '''Vende un producto'''
+        producto_a_vender = dict
+        #Verificar producto en productos
+        for producto in self.__productos:
+            if producto.nombre.lower() == nombre_producto.lower():
+                producto_a_vender = producto
+                break
+        #Intenta trabajar el prodcuto, si no existe exceptua y retorna False
+        try: 
+                #verifica cantidad ingredientes
+            for ingrediente in producto_a_vender.ingredientes:
+                if isinstance(ingrediente, Base) and ingrediente.unidades < 1:
+                    return False
+                if ingrediente.unidades < 0.2:
+                    return False
+                #Resta la cantidad de ingredientes del producto.
+            for ingrediente in producto_a_vender.ingredientes:
+                if isinstance(ingrediente, Base):
+                    ingrediente.unidades -= 1.0
+                else:
+                    ingrediente.unidades -= 0.2
+            #Suma a las ventas del dia
+            self.__ventas_del_dia += producto_a_vender.precio_publico
+            #Retorna que el producto se vendio
+            return True
+        except Exception:
+            return False
+    
+    @property
+    def nombre(self):
+        return self.__nombre
+    @nombre.setter
+    def nombre(self, nuevo_nombre:str) -> str:
+        if isinstance(nuevo_nombre, str) and nuevo_nombre != '':
+            self.__nombre = nuevo_nombre
+    
+    @property
+    def productos(self):
+        return self.__productos
+    @productos.setter
+    def productos(self, nuevos_productos: list) -> list:
+        if isinstance(nuevos_productos, list) and nuevos_productos != '' and len(nuevos_productos) == 4:
+            self.__productos = nuevos_productos
+    
+    @property
+    def ventas_del_dia(self):
+        return self.__ventas_del_dia
