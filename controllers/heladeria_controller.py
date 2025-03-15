@@ -52,10 +52,6 @@ def heladeria_controller():
     heladeria.vender('Copa Chocolate')
     heladeria.vender('Malteada de Mandarina')
 
-    #Abasteciendo todos los ingredientes.
-    ''' for ingrediente in ingredientes_disponibles:
-        ingrediente.abastecer'''
-
     #A presentar en el frontend:
     salida = {
         'rentable': heladeria.producto_mas_rentable(),
