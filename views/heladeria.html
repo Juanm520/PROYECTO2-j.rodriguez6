@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>Heladeria - Detalles</title>
+</head>
+<body>
+    <h1>Detalles de Sammy El Heladero</h1>
+    <section class="cuerpo">
+        <section class="Lista">
+         {% for producto in salida.productos %}
+         <ul>
+            <li>{{ producto.nombre }} - Precio: {{ producto.precio_publico }} - Ingredientes: 
+                {% for ingrediente in producto.ingredientes %}
+                    <p>{{ ingrediente.nombre }}</p>
+                    {% endfor %}
+            </li>
+        </ul>
+            {% endfor %}
+
+        <a href="/">
+            <button class="primary">Ir al Menu</button>
+        </a> 
+        </section>
+        <section>
+            <h2>Ventas del dia</h2>
+            <h3>${{ salida.ventas }}</h3>
+            <h2>Producto mas Rentable</h2>
+            <h3>**{{ salida.rentable }}**</h3>
+        </section>
+    </section>
+    
+</body>
+</html>

@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <title>Heladeria</title>
 </head>
 <body>
+    <h1>Menu Sammy El Heladero</h1>
+    <section class="Lista">
+        <ul> {% for producto in productos %}
+            
+        <li>{{ producto.nombre }} - Precio: {{ producto.precio_publico }}</li>
+                {% endfor %}
+        </ul>
+
+        <a href="/heladeria">
+            <button class="primary">Ir a detalles de la Heladeria</button>
+        </a> 
+    </section>
+
     
 </body>
 </html>

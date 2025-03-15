@@ -1,4 +1,4 @@
-from IProducto import IProducto
+from models.IProducto import IProducto
 
 class Copa(IProducto):
     def __init__(self, nombre: str, precio_publico: float, ingredientes: list, tipo_vaso: str):

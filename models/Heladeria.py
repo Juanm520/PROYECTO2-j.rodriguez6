@@ -1,4 +1,5 @@
-from Base import Base
+from models.Base import Base
+from models.Ingredientes_db import Ingrediente
 
 class Heladeria():
     def __init__(self, nombre: str, productos: list):
@@ -20,7 +21,7 @@ class Heladeria():
             if producto.nombre.lower() == nombre_producto.lower():
                 producto_a_vender = producto
                 break
-        #Intenta trabajar el prodcuto, si no existe exceptua y retorna False
+        #Intenta trabajar el producto, si no existe exceptua y retorna False
         try: 
                 #verifica cantidad ingredientes
             for ingrediente in producto_a_vender.ingredientes:
@@ -34,8 +35,12 @@ class Heladeria():
                     ingrediente.unidades -= 1.0
                 else:
                     ingrediente.unidades -= 0.2
+                 #Actualiza los cambios en la base de datos.
+                Ingrediente.query.filter_by(nombre = ingrediente.nombre).update({"unidades": ingrediente.unidades})
+                Ingrediente.commit()
             #Suma a las ventas del dia
             self.__ventas_del_dia += producto_a_vender.precio_publico
+            #Actualiza los cambios en la base de datos
             #Retorna que el producto se vendio
             return True
         except Exception:
