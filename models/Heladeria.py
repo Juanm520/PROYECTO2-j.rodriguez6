@@ -26,9 +26,9 @@ class Heladeria():
                 #verifica cantidad ingredientes
             for ingrediente in producto_a_vender.ingredientes:
                 if isinstance(ingrediente, Base) and ingrediente.unidades < 1:
-                    return False
+                    raise ValueError(f'Oh no! Nos hemos quedado sin {ingrediente.nombre} ☹️')
                 if ingrediente.unidades < 0.2:
-                    return False
+                    raise ValueError(f'Oh no! Nos hemos quedado sin {ingrediente.nombre} ☹️')
                 #Resta la cantidad de ingredientes del producto.
             for ingrediente in producto_a_vender.ingredientes:
                 if isinstance(ingrediente, Base):
@@ -40,10 +40,14 @@ class Heladeria():
                 Ingrediente.commit()
             #Suma a las ventas del dia
             self.__ventas_del_dia += producto_a_vender.precio_publico
-            #Actualiza los cambios en la base de datos
             #Retorna que el producto se vendio
+            print('¡Vendido!')
             return True
+        except ValueError as error:
+            print(error)
+            return False
         except Exception:
+            print('No existe el producto.')
             return False
     
     @property

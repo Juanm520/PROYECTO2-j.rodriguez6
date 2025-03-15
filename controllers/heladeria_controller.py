@@ -53,10 +53,8 @@ def heladeria_controller():
     heladeria.vender('Malteada de Mandarina')
 
     #Abasteciendo todos los ingredientes.
-    for ingrediente in ingredientes_disponibles:
-        ingrediente.abastecer()
-
-    print(heladeria.ventas_del_dia)
+    ''' for ingrediente in ingredientes_disponibles:
+        ingrediente.abastecer'''
 
     #A presentar en el frontend:
     salida = {
