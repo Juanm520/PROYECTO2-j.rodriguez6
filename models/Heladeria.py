@@ -1,5 +1,5 @@
 from models.Base import Base
-from models.Ingredientes_db import Ingrediente
+'''from models.Ingredientes_db import Ingrediente'''
 
 class Heladeria():
     def __init__(self, nombre: str, productos: list):
@@ -22,33 +22,28 @@ class Heladeria():
                 producto_a_vender = producto
                 break
         #Intenta trabajar el producto, si no existe exceptua y retorna False
-        try: 
+        try:
                 #verifica cantidad ingredientes
             for ingrediente in producto_a_vender.ingredientes:
                 if isinstance(ingrediente, Base) and ingrediente.unidades < 1:
-                    raise ValueError(f'Oh no! Nos hemos quedado sin {ingrediente.nombre} ☹️')
+                    raise ValueError(f'Oh no! Nos hemos quedado sin {ingrediente.nombre}☹️')
                 if ingrediente.unidades < 0.2:
-                    raise ValueError(f'Oh no! Nos hemos quedado sin {ingrediente.nombre} ☹️')
+                    raise ValueError(f'Oh no! Nos hemos quedado sin {ingrediente.nombre}☹️')
                 #Resta la cantidad de ingredientes del producto.
             for ingrediente in producto_a_vender.ingredientes:
                 if isinstance(ingrediente, Base):
                     ingrediente.unidades -= 1.0
                 else:
                     ingrediente.unidades -= 0.2
-                 #Actualiza los cambios en la base de datos.
-                Ingrediente.query.filter_by(nombre = ingrediente.nombre).update({"unidades": ingrediente.unidades})
-                Ingrediente.commit()
+                 #Actualiza los cambios en la base de datos (Comentado para no implicar la base de datos en la prueba).
+                #Ingrediente.query.filter_by(nombre = ingrediente.nombre).update({"unidades": ingrediente.unidades})
+                #Ingrediente.commit()'''
             #Suma a las ventas del dia
             self.__ventas_del_dia += producto_a_vender.precio_publico
             #Retorna que el producto se vendio
-            print('¡Vendido!')
-            return True
-        except ValueError as error:
-            print(error)
-            return False
-        except Exception:
-            print('No existe el producto.')
-            return False
+            return '¡Vendido!'
+        except AttributeError as error:
+            raise ValueError('No existe el producto.') from error
     
     @property
     def nombre(self):

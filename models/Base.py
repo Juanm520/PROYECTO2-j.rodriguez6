@@ -9,9 +9,9 @@ class Base(Ingrediente):
     def abastecer(self):
         '''Abastece cinco unidades del ingrediente base'''
         self.unidades += 5.0
-        ''' ingrediente.query.filter_by(nombre = self.nombre).update({"unidades": self.unidades})
-        ingrediente.commit()
-        '''
+        #ingrediente.query.filter_by(nombre = self.nombre).update({"unidades": self.unidades})
+        #ingrediente.commit()
+        
     @property
     def sabor(self):
         return self.__sabor
