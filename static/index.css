@@ -17,6 +17,10 @@ h2 {
     color: #ffcc00;
 }
 
+h4 {
+    color: #ffcc00;
+}
+
 .cuerpo {
     display: flex;
     align-items: start;

@@ -25,6 +25,12 @@
         </a> 
         </section>
         <section>
+            <h3>Vendido:</h3>
+            {% for vendido in salida.vendido %}
+            <ul>
+                <li>{{ vendido[0] }} - Precio: ${{ vendido[1] }} Estado de venta: <h4><b><i>{{ vendido[2] }}</i></b></h6></li>
+            </ul> 
+            {% endfor %}
             <h2>Ventas del dia</h2>
             <h3>${{ salida.ventas }}</h3>
             <h2>Producto mas Rentable</h2>

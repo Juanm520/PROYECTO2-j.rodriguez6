@@ -47,16 +47,20 @@ def heladeria_controller():
     heladeria = Heladeria('Sammy el Heladero', productos_disponibles)
 
     #Ventas de comprobacion y para agregar saldo a las ventas diarias.
-    heladeria.vender('Copa Junior')
-    heladeria.vender('Copa Chocolate')
-    heladeria.vender('Copa Chocolate')
-    heladeria.vender('Malteada de Mandarina')
+    a_vender = [productos_disponibles[0], productos_disponibles[1], productos_disponibles[1], productos_disponibles[3]]
+    vendido = []
+    for producto in a_vender:
+        try:
+            vendido.append((producto.nombre, producto.precio_publico, heladeria.vender(producto.nombre)))
+        except ValueError as error:
+            vendido.append((producto.nombre, 0, error))
 
     #A presentar en el frontend:
     salida = {
         'rentable': heladeria.producto_mas_rentable(),
         'ventas': heladeria.ventas_del_dia,
-        'productos': heladeria.productos
+        'productos': heladeria.productos,
+        'vendido': vendido
     }
     
     return render_template('heladeria.html', salida = salida)
